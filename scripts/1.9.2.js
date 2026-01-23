@@ -56,7 +56,8 @@ const ntohs = new NativeFunction(Module.findExportByName('libc.so', 'ntohs'), 'u
 const inet_addr = new NativeFunction(Module.findExportByName('libc.so', 'inet_addr'), 'int', ['pointer']);
 
 var saharlol = {
-    misc: function() {
+    misc: {
+        Strings: function(){ 
         unlock(Offsets.TID_BUTTON_HELP);
         unlock(Offsets.TID_BUTTON_PRIVACY);
         unlock(Offsets.TID_BUTTON_PARENTS);
@@ -70,7 +71,8 @@ var saharlol = {
         Memory.writeUtf8String(Libg.offset(Offsets.TID_BUTTON_TOS), Config.TosButton);
         Memory.writeUtf8String(Libg.offset(Offsets.TID_TAB_BATTLE), Config.BattleTab);
         Memory.writeUtf8String(Libg.offset(Offsets.TID_SETTINGS), Config.Settings);
-        
+        },
+        Battles: function(){
         if (Process.arch === 'arm') {
             // armv7
             Memory.writeU8(Libg.offset(Offsets.BATTLE_PATCH_1), 0xD1); // D0 -> D1
@@ -81,6 +83,7 @@ var saharlol = {
             Memory.writeU8(Libg.offset(Offsets.BATTLE_PATCH_2), 0xC0); // 14 -> C0
             Memory.writeU8(Libg.offset(0x2908C0), 0xEB); // 75 -> EB
         }
+     }
     },
     redirectConnection: function() {
         Interceptor.attach(Module.findExportByName('libc.so', 'connect'), {
@@ -104,7 +107,8 @@ function unlock(addr) {
 rpc.exports = {
     init: function(stage, options) {
         Interceptor.detachAll();
-        saharlol.misc();
+        saharlol.misc.Strings();
+        saharlol.misc.Battles();
         saharlol.redirectConnection();
     }
 };
