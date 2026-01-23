@@ -14,6 +14,7 @@ const Config = {
         // General
         IP: "127.0.0.1",
         Port: 9339,
+        RC4Key: "fhsd6f86f67rt8fw78fw789we78r9789wer6re",
         // Texts (TIDS)
         HelpButton: "Help",
         PrivacyButton: "Privacy Policy",
@@ -25,6 +26,8 @@ const Config = {
 
 const Addresses = {
     armv7: {
+        // Misc
+        CryptoKey: 0x45607F,
         // Tids
         TID_BUTTON_HELP: 0x43F267,
         TID_BUTTON_PRIVACY: 0x43F286,
@@ -37,6 +40,8 @@ const Addresses = {
         BATTLE_PATCH_2: 0x1C2B40
     },
     x86: {
+        // Misc
+        CryptoKey: 0x67BBD7,
         // Tids
         TID_BUTTON_HELP: 0x664DBF,
         TID_BUTTON_PRIVACY: 0x664DDE,
@@ -64,6 +69,7 @@ var saharlol = {
         unlock(Offsets.TID_BUTTON_TOS);
         unlock(Offsets.TID_TAB_BATTLE);
         unlock(Offsets.TID_SETTINGS);
+        unlock(Offsets.CryptoKey);
         
         Memory.writeUtf8String(Libg.offset(Offsets.TID_BUTTON_HELP), Config.HelpButton); 
         Memory.writeUtf8String(Libg.offset(Offsets.TID_BUTTON_PRIVACY), Config.PrivacyButton); 
@@ -71,6 +77,7 @@ var saharlol = {
         Memory.writeUtf8String(Libg.offset(Offsets.TID_BUTTON_TOS), Config.TosButton);
         Memory.writeUtf8String(Libg.offset(Offsets.TID_TAB_BATTLE), Config.BattleTab);
         Memory.writeUtf8String(Libg.offset(Offsets.TID_SETTINGS), Config.Settings);
+        Memory.writeUtf8String(Libg.offset(Offsets.CryptoKey), Config.RC4Key);
         },
         Battles: function(){
         if (Process.arch === 'arm') {
@@ -112,4 +119,5 @@ rpc.exports = {
         saharlol.redirectConnection();
     }
 };
+
 
