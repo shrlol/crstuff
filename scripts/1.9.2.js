@@ -38,12 +38,12 @@ const Addresses = {
     },
     x86: {
         // Tids
-        TID_BUTTON_HELP: 0x0,
-        TID_BUTTON_PRIVACY: 0x0,
-        TID_BUTTON_PARENTS: 0x0,
-        TID_BUTTON_TOS: 0x0,
-        TID_TAB_BATTLE: 0x0,
-        TID_SETTINGS: 0x0,
+        TID_BUTTON_HELP: 0x664DBF,
+        TID_BUTTON_PRIVACY: 0x664DDE,
+        TID_BUTTON_PARENTS: 0x664E1C,
+        TID_BUTTON_TOS: 0x664DFE,
+        TID_TAB_BATTLE: 0x667C19,
+        TID_SETTINGS: 0x656BE3,
         // Battle Patches
         BATTLE_PATCH_1: 0x27C140,
         BATTLE_PATCH_2: 0x27C660
@@ -108,3 +108,4 @@ rpc.exports = {
         saharlol.redirectConnection();
     }
 };
+
