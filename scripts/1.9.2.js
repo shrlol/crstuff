@@ -92,16 +92,19 @@ var saharlol = {
         }
      }
     },
-    redirectConnection: function() {
-        Interceptor.attach(Module.findExportByName('libc.so', 'connect'), {
+    core: {
+      Setup: function() {
+        Interceptor.attach(Module.findExportByName(null, "getaddrinfo"), {
             onEnter: function(args) {
-                if (ntohs(Memory.readU16(args[1].add(2))) === 9339) {
-                    Memory.writeU16(args[1].add(2), ntohs(Config.Port));
-                    Memory.writeInt(args[1].add(4), inet_addr(Memory.allocUtf8String(Config.IP)));
+                if (args[0].readUtf8String() == "game.clashroyaleapp.com" || args[1].readUtf8String() == "9339") 
+                {
+                    args[0].writeUtf8String(Config.IP);
+                    args[1].writeUtf8String(Config.Port);
                 }
             }
         });
     }
+  }
 };
 
 function unlock(addr) {
@@ -116,8 +119,9 @@ rpc.exports = {
         Interceptor.detachAll();
         saharlol.misc.Strings();
         saharlol.misc.Battles();
-        saharlol.redirectConnection();
+        saharlol.core.Setup();
     }
 };
+
 
 
